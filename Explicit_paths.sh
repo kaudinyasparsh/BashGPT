@@ -1,7 +1,8 @@
 #!/usr/bin/bash
 
-read -p 'Enter the file path: ' filename
-echo -e '\n'
+filename=$1
+
+function explicit(){
 
 : '
 1. Count the number of lines for the skew grp table
@@ -28,9 +29,7 @@ start_exitstat=$?
 	print "--------------------\n\n"
 	print "Skew Group\t\t\t\t Min ID\t\t Max ID\t\t AvgID\t\t Target Skew\t Actual Skew\n"
 	}
-
 	{
-
 	if(NR==1){
         	print $1"\n"
         	printf "%-40s %0.3f\t\t %0.3f\t\t %0.3f\t\t %s\t\t %0.3f\n", $2, $4, $5, $6, $9, $10
@@ -38,9 +37,7 @@ start_exitstat=$?
 	else{
         	printf "%-40s %0.3f\t\t %0.3f\t\t %0.3f\t\t %s\t\t %0.3f\n", $1, $3, $4, $5, $8, $9
         }   
-
 	}	
-
 	END{
 	print "\nNOTE: * means that Target Skew was not met."
 	}' skgrp.txt
@@ -52,4 +49,5 @@ start_exitstat=$?
 else
 	echo -e "File is not present. Please check again.\n" 
 fi
-
+}
+explicit

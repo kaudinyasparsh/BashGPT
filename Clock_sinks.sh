@@ -1,6 +1,9 @@
 #!/usr/bin/bash
-read -p "Enter the file name:" filename
 
+filename=$1
+
+function sinks(){
+	
 if [ -e $filename ];
 then
 line_no=`egrep -in -A2 'Skew Group Structure' $filename | tail -1 | awk -F- '{print $1}'`
@@ -23,3 +26,5 @@ done
 else
 	echo -e "File is not present. Please Check Again."
 fi
+}
+sinks
